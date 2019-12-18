@@ -12,7 +12,7 @@ import edra.behavior_tree.BTStatus;
 
 import java.awt.*;
 
-//TODO falta testar
+
 public class IfPlayerIsSurrounded extends BTNode<BTreePlayer> {
     @Override
     public BTStatus tick(BTreePlayer agent) {
@@ -25,11 +25,10 @@ public class IfPlayerIsSurrounded extends BTNode<BTreePlayer> {
         List<PlayerPerception> oponentes = fieldPerc.getTeamPlayers(ladoOponente);
         int numeroJogadoresProximos = 0;
         for (PlayerPerception player : oponentes ) {
-            //Se há mais de 2 jogadores proximos do atual, então ele esta marcado
+            //CHECKA SE EXISTEM MAIS DE DOIS JOGADORES PROXIMO DO JOGADOR
             if(numeroJogadoresProximos > 2) {
                 return BTStatus.SUCCESS;
             }
-            //Checa se o jogador opoente atual esta dentro do retangulo
             if(area.contains(player.getPosition().getX(), player.getPosition().getY())) {
                 numeroJogadoresProximos++;
             }

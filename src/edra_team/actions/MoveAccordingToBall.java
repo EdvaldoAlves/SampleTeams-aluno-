@@ -35,7 +35,7 @@ public class MoveAccordingToBall extends BTNode<BTreePlayer> {
 			}
 			return true;
 		}
-		else if(ballPos.getY() > playerPos.getY()+1.3) { //esse 1.3 eh pra ter certeza que ele vai ter o turntodirection completo antes do dash
+		else if(ballPos.getY() > playerPos.getY()+1.3) { //SE CERTIFICA QUE VAI VIRAR O JOGADOR ANTES DE EXECUTAR O DASH
 			if(agent.getSelfPerc().getPosition().getY() < 5.75) {
 				agent.getCommander().doTurnToDirection(new Vector2D(0, 7));
 				agent.getCommander().doDashBlocking(100);

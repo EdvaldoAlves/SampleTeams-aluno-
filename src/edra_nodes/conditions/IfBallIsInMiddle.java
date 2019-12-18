@@ -16,7 +16,7 @@ import java.awt.*;
  * Esta classe retorna sucesso caso o jogador atua esteja no FieldMiddle
  */
 //TODO falta testar
-public class IfBallIsInFieldMiddle extends BTNode<BTreePlayer> {
+public class IfBallIsInMiddle extends BTNode<BTreePlayer> {
     @Override
     public BTStatus tick(BTreePlayer agent) {
         EFieldSide side = agent.getSelfPerc().getSide();
