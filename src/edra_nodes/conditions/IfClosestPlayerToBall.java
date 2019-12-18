@@ -30,10 +30,6 @@ public class IfClosestPlayerToBall extends BTNode<BTreePlayer> {
 			}
 		}
 		
-//		print(5000, "No ", selfPerc.getUniformNumber(), ", pos: ",
-//				selfPerc.getPosition(),	", TEAM ", selfPerc.getSide(),
-//				", CLOSEST? " + (closestPlayer.getUniformNumber() == selfPerc.getUniformNumber()));
-		
 		if (closestPlayer.getUniformNumber() == selfPerc.getUniformNumber()) {
 			return BTStatus.SUCCESS;
 		} else {

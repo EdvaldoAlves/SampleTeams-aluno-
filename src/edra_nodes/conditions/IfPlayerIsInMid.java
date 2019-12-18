@@ -9,20 +9,15 @@ import edra.behavior_tree.BTStatus;
 import java.awt.*;
 
 
-public class IfBallIsInGoalieArea extends BTNode<BTreePlayer> {
-
+public class IfPlayerIsInMid extends BTNode<BTreePlayer> {
     @Override
     public BTStatus tick(BTreePlayer agent) {
         EFieldSide side = agent.getSelfPerc().getSide();
-        Rectangle area = (side == EFieldSide.LEFT) ?
-                new Rectangle(-51, -21, 16, 42) :
-                new Rectangle(36, -21, 18, 42);
-        Vector2D ballPos = agent.getFieldPerc().getBall().getPosition();
-
-        if(area.contains(ballPos.getX(), ballPos.getY())) {
+        Rectangle fieldAttack = new Rectangle(-18,-34, 34, 68);
+        Vector2D currentPos = agent.getSelfPerc().getPosition();
+        if(fieldAttack.contains(currentPos.getX(), currentPos.getY())) {
             return BTStatus.SUCCESS;
         }
-
         return BTStatus.FAILURE;
     }
 }

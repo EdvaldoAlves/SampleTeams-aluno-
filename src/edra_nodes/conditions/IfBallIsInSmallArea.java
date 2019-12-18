@@ -8,13 +8,7 @@ import edra.behavior_tree.BTStatus;
 
 import java.awt.*;
 
-/**
- * Checa se a bola está dentro da grande area
- *
- *
- *
- *
- */
+
 public class IfBallIsInSmallArea extends BTNode<BTreePlayer> {
 
     @Override

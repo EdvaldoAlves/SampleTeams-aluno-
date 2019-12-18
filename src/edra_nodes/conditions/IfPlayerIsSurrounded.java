@@ -25,7 +25,7 @@ public class IfPlayerIsSurrounded extends BTNode<BTreePlayer> {
         List<PlayerPerception> oponentes = fieldPerc.getTeamPlayers(ladoOponente);
         int numeroJogadoresProximos = 0;
         for (PlayerPerception player : oponentes ) {
-            //CHECKA SE EXISTEM MAIS DE DOIS JOGADORES PROXIMO DO JOGADOR
+            //VERIFICA SE EXISTEM MAIS DE DOIS JOGADORES PROXIMO DO JOGADOR
             if(numeroJogadoresProximos > 2) {
                 return BTStatus.SUCCESS;
             }

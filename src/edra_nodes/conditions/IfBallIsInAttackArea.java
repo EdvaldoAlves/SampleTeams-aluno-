@@ -8,19 +8,17 @@ import edra.behavior_tree.BTStatus;
 
 import java.awt.*;
 
-public class IfGoalieOutOfSmallArea extends BTNode<BTreePlayer> {
+public class IfBallIsInAttackArea extends BTNode<BTreePlayer> {
     @Override
     public BTStatus tick(BTreePlayer agent) {
         EFieldSide side = agent.getSelfPerc().getSide();
-        Rectangle area = (side == EFieldSide.LEFT) ?
-                new Rectangle(-52, -9, 6, 18) :
-                new Rectangle(46, -9, 6, 18);
-        Vector2D currentPos = agent.getSelfPerc().getPosition();
-
-        if(area.contains(currentPos.getX(), currentPos.getY())) {
+        Rectangle fieldAttack = (side == EFieldSide.RIGHT) ?
+                new Rectangle(16,-34, 34, 68) :
+                new Rectangle(-52,-34, 34, 68);
+        Vector2D ballPos = agent.getFieldPerc().getBall().getPosition();
+        if(fieldAttack.contains(ballPos.getX(), ballPos.getY())) {
             return BTStatus.SUCCESS;
         }
-
         return BTStatus.FAILURE;
     }
 }

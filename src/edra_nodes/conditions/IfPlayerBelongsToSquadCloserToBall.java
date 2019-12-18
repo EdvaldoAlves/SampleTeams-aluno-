@@ -10,15 +10,8 @@ import edra.behavior_tree.BTStatus;
 
 import java.util.List;
 
-/**
- * Uma das estratégias de defesa/ataque é realizar jogadas em trio com jogadores
- * do mesmo time.
- *
- * Esta classe checa se o jogador atual pertence a o trio de jogadores mais próximo
- * da bola no momento.
- */
-//TODO falta testar
-public class IfPlayerBelongsToTrioCloserToBall extends BTNode<BTreePlayer> {
+
+public class IfPlayerBelongsToSquadCloserToBall extends BTNode<BTreePlayer> {
     @Override
     public BTStatus tick(BTreePlayer agent) {
         Vector2D ballPos = agent.getFieldPerc().getBall().getPosition();
