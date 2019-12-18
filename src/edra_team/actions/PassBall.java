@@ -8,18 +8,14 @@ import edra.behavior_tree.BTStatus;
 
 import java.util.List;
 
-/**
- * tenta passar para o jogador mais proximo e menos marcado
- */
+
 public class PassBall extends BTNode<BTreePlayer> {
-//ordeno jogadores aliados de acordo com a distancia
-    //checo qual o com menos marcacao e chuto para ele
+
     @Override
     public BTStatus tick(BTreePlayer agent) {
         Vector2D ballPosition = agent.getFieldPerc().getBall().getPosition();
         List<PlayerPerception> myTeam = agent.getFieldPerc().getTeamPlayers(agent.getSelfPerc().getSide());
 
-        //removendo o this.agent da lista
         PlayerPerception thisPlayer = null;
         for(int i = 0 ; i < myTeam.size() ; i++) {
             if(myTeam.get(i).getUniformNumber() == agent.getSelfPerc().getUniformNumber()) {

@@ -6,9 +6,8 @@ import edra.BTreePlayer;
 import edra.behavior_tree.BTNode;
 import edra.behavior_tree.BTStatus;
 
-//Ã© usada no tratamento do estado BeforeKickOff
-//move o jogador para sua home position instantaneamente
-public class MovePlayerToHomePosition extends BTNode<BTreePlayer> {
+
+public class GoToHomePosition extends BTNode<BTreePlayer> {
     @Override
     public BTStatus tick(BTreePlayer agent) {
         EFieldSide side = agent.getSelfPerc().getSide();
@@ -19,8 +18,7 @@ public class MovePlayerToHomePosition extends BTNode<BTreePlayer> {
             homePosition.setY(-homePosition.getY()); 
         }
 
-        //Este if serve para evitar de recolocar o jogador na home position, caso ele
-        //ja esteja posicionado nela. Economiza processamento do servidor
+       //VERIFICA SE JÁ ESTÁ NA HOME 
         Vector2D currentPos = agent.getSelfPerc().getPosition();
         if(homePosition.getX() == currentPos.getX() && homePosition.getY() == currentPos.getY()) {
             return BTStatus.SUCCESS;

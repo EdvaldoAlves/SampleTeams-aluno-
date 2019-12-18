@@ -22,9 +22,9 @@ import edra_nodes.conditions.IfPlayerIsInAttackArea;
 import edra_nodes.conditions.IfPlayerIsInFieldDefense;
 import edra_nodes.conditions.IfPlayerIsInMid;
 import edra_nodes.conditions.IfRightSide;
-import edra_nodes.movements.MovePlayerToHomePosition;
-import edra_nodes.movements.MovePlayerToKickOff;
-import edra_nodes.movements.MovePlayerToSmallArea;
+import edra_nodes.movements.GoToHomePosition;
+import edra_nodes.movements.GoToKickOff;
+import edra_nodes.movements.GoToSmallArea;
 import edra_nodes.states.AfterGoalLeft;
 import edra_nodes.states.AfterGoalRight;
 import edra_nodes.states.BeforeKickOff;
@@ -39,13 +39,13 @@ import edra_nodes.states.KickOffRight;
 import edra_nodes.states.OffsideLeft;
 import edra_nodes.states.OffsideRight;
 import edra_nodes.states.PlayOn;
-import edra_team.actions.AdvanceAccordingToHomePosition;
+import edra_team.actions.MovingUsingHomePosition;
 import edra_team.actions.AdvanceWithBallToGoal;
 import edra_team.actions.GoGetBall;
 import edra_team.actions.KickToScore;
 import edra_team.actions.MoveAccordingToBall;
 import edra_team.actions.PassBall;
-import edra_team.actions.RetreatAccordingToHomePosition;
+import edra_team.actions.RetreatUsingHomePosition;
 import edra_team.actions.ReturnToHomePosition;
 
 
@@ -151,7 +151,7 @@ import edra_team.actions.ReturnToHomePosition;
 			return raiz;
 			
 		}
-		// Inicio do jogo
+	
 		private BTNode<BTreePlayer> playOn(BTNode<BTreePlayer> playerBehaviorTree) {
 			
 			Selector<BTreePlayer> playOn = new Selector<BTreePlayer>("Play On");
@@ -173,13 +173,13 @@ import edra_team.actions.ReturnToHomePosition;
 			root.add(afterGoalRight);
 
 			beforeKickOff.add(new BeforeKickOff());
-			beforeKickOff.add(new MovePlayerToHomePosition());
+			beforeKickOff.add(new GoToHomePosition());
 
 			afterGoalLeft.add(new AfterGoalLeft());
-			afterGoalLeft.add(new MovePlayerToHomePosition());
+			afterGoalLeft.add(new GoToHomePosition());
 
 			afterGoalRight.add(new AfterGoalRight());
-			afterGoalRight.add(new MovePlayerToHomePosition());
+			afterGoalRight.add(new GoToHomePosition());
 
 			return root;
 			
@@ -214,13 +214,13 @@ import edra_team.actions.ReturnToHomePosition;
 			root.add(kickOffRight);
 
 			kickOffLeft.add(new KickOffLeft());
-			kickOffLeft.add(new MovePlayerToKickOff());
+			kickOffLeft.add(new GoToKickOff());
 			kickOffLeft.add(new IfClosestPlayerToBall());
 			kickOffLeft.add(new GoGetBall());
 			kickOffLeft.add(new PassBall());
 
 			kickOffRight.add(new KickOffRight());
-			kickOffRight.add((new MovePlayerToKickOff()));
+			kickOffRight.add((new GoToKickOff()));
 			kickOffRight.add(new IfClosestPlayerToBall());
 			kickOffRight.add(new GoGetBall());
 			kickOffRight.add(new PassBall());
@@ -242,7 +242,7 @@ import edra_team.actions.ReturnToHomePosition;
 			offsideLeft.add(new OffsideLeft());
 			offsideLeft.add(new IfLeftSide());
 			offsideLeft.add(new IfIAmNotGoalie());
-			offsideLeft.add(new RetreatAccordingToHomePosition());
+			offsideLeft.add(new RetreatUsingHomePosition());
 			
 			//Senao passe a bola
 			offsideLeft.add(new IfClosestPlayerToBall());
@@ -252,7 +252,7 @@ import edra_team.actions.ReturnToHomePosition;
 			offsideRight.add(new OffsideRight());
 			offsideRight.add(new IfRightSide());
 			offsideRight.add(new IfIAmNotGoalie());
-			offsideRight.add(new RetreatAccordingToHomePosition());
+			offsideRight.add(new RetreatUsingHomePosition());
 			
 			//Senao passe a bola
 			offsideRight.add(new IfClosestPlayerToBall());
@@ -271,12 +271,12 @@ import edra_team.actions.ReturnToHomePosition;
 			
 			cornerKickLeft.add(new CornerKickLeft()); //52x,34y -34y 
 			cornerKickLeft.add(new IfClosestPlayerToBall());
-			cornerKickLeft.add(new MovePlayerToSmallArea());
+			cornerKickLeft.add(new GoToSmallArea());
 			cornerKickLeft.add(new PassBall());
 			
 			cornerKickRight.add(new CornerKickRight()); //-52x,34y -34y 
 			cornerKickRight.add(new IfClosestPlayerToBall());
-			cornerKickRight.add(new MovePlayerToSmallArea());
+			cornerKickRight.add(new GoToSmallArea());
 			cornerKickRight.add(new PassBall());
 			
 			return cornerKick;
@@ -354,12 +354,12 @@ import edra_team.actions.ReturnToHomePosition;
 			Sequence<BTreePlayer> e = new Sequence<BTreePlayer>(" ");
 			e.add(new IfPlayerIsInMid());
 			e.add(new IfBallIsInDefenseArea());
-			e.add(new RetreatAccordingToHomePosition());
+			e.add(new RetreatUsingHomePosition());
 
 			Sequence<BTreePlayer> f = new Sequence<BTreePlayer>(" ");
 			f.add(new IfPlayerIsInMid());
 			f.add(new IfBallIsInAttackArea());
-			f.add(new RetreatAccordingToHomePosition());
+			f.add(new RetreatUsingHomePosition());
 
 			regiaoMeio.add(d);
 			regiaoMeio.add(e);
@@ -383,7 +383,7 @@ import edra_team.actions.ReturnToHomePosition;
 			Sequence<BTreePlayer> i = new Sequence<BTreePlayer>(" ");
 			i.add(new IfPlayerIsInAttackArea());
 			i.add(new IfBallIsInMid());
-			i.add(new RetreatAccordingToHomePosition());
+			i.add(new RetreatUsingHomePosition());
 
 			Sequence<BTreePlayer> j = new Sequence<BTreePlayer>(" ");
 			j.add(new IfPlayerIsInAttackArea());
@@ -421,7 +421,7 @@ import edra_team.actions.ReturnToHomePosition;
 			Sequence<BTreePlayer> b = new Sequence<BTreePlayer>(" ");
 			b.add(new IfPlayerIsInFieldDefense());
 			b.add(new IfBallIsInMid());
-			b.add(new AdvanceAccordingToHomePosition());
+			b.add(new MovingUsingHomePosition());
 
 			//CASO A BOLA ESTEJA NO CAMPO DE ATAQUE
 			Sequence<BTreePlayer> c = new Sequence<BTreePlayer>(" ");
@@ -446,12 +446,12 @@ import edra_team.actions.ReturnToHomePosition;
 			Sequence<BTreePlayer> e = new Sequence<BTreePlayer>(" ");
 			e.add(new IfPlayerIsInMid());
 			e.add(new IfBallIsInDefenseArea());
-			e.add(new RetreatAccordingToHomePosition());
+			e.add(new RetreatUsingHomePosition());
 
 			Sequence<BTreePlayer> f = new Sequence<BTreePlayer>(" ");
 			f.add(new IfPlayerIsInMid());
 			f.add(new IfBallIsInAttackArea());
-			f.add(new RetreatAccordingToHomePosition());
+			f.add(new RetreatUsingHomePosition());
 
 			regiaoMeio.add(d);
 			regiaoMeio.add(e);
@@ -498,12 +498,12 @@ import edra_team.actions.ReturnToHomePosition;
 			Sequence<BTreePlayer> e = new Sequence<BTreePlayer>(" ");
 			e.add(new IfPlayerIsInMid());
 			e.add(new IfBallIsInDefenseArea());
-			e.add(new RetreatAccordingToHomePosition());
+			e.add(new RetreatUsingHomePosition());
 
 			Sequence<BTreePlayer> f = new Sequence<BTreePlayer>(" ");
 			f.add(new IfPlayerIsInMid());
 			f.add(new IfBallIsInAttackArea());
-			f.add(new RetreatAccordingToHomePosition());
+			f.add(new RetreatUsingHomePosition());
 
 			regiaoMeio.add(d);
 			regiaoMeio.add(e);
@@ -526,7 +526,7 @@ import edra_team.actions.ReturnToHomePosition;
 			Sequence<BTreePlayer> i = new Sequence<BTreePlayer>(" ");
 			i.add(new IfPlayerIsInAttackArea());
 			i.add(new IfBallIsInMid());
-			i.add(new RetreatAccordingToHomePosition());
+			i.add(new RetreatUsingHomePosition());
 
 			Sequence<BTreePlayer> j = new Sequence<BTreePlayer>(" ");
 			j.add(new IfPlayerIsInAttackArea());
@@ -562,7 +562,7 @@ import edra_team.actions.ReturnToHomePosition;
 			Sequence<BTreePlayer> b = new Sequence<BTreePlayer>(" ");
 			b.add(new IfPlayerIsInFieldDefense());
 			b.add(new IfBallIsInMid());
-			b.add(new AdvanceAccordingToHomePosition());
+			b.add(new MovingUsingHomePosition());
 
 			Sequence<BTreePlayer> c = new Sequence<BTreePlayer>(" ");
 			c.add(new IfPlayerIsInFieldDefense());
@@ -585,12 +585,12 @@ import edra_team.actions.ReturnToHomePosition;
 			Sequence<BTreePlayer> e = new Sequence<BTreePlayer>(" ");
 			e.add(new IfPlayerIsInMid());
 			e.add(new IfBallIsInDefenseArea());
-			e.add(new RetreatAccordingToHomePosition());
+			e.add(new RetreatUsingHomePosition());
 
 			Sequence<BTreePlayer> f = new Sequence<BTreePlayer>(" ");
 			f.add(new IfPlayerIsInMid());
 			f.add(new IfBallIsInAttackArea());
-			f.add(new RetreatAccordingToHomePosition());
+			f.add(new RetreatUsingHomePosition());
 
 			regiaoMeio.add(d);
 			regiaoMeio.add(e);

@@ -6,7 +6,7 @@ import edra.BTreePlayer;
 import edra.behavior_tree.BTNode;
 import edra.behavior_tree.BTStatus;
 
-public class RetreatAccordingToHomePosition extends BTNode<BTreePlayer> {
+public class RetreatUsingHomePosition extends BTNode<BTreePlayer> {
     @Override
     public BTStatus tick(BTreePlayer agent) {
         Vector2D homePosition = agent.getHomePosition();

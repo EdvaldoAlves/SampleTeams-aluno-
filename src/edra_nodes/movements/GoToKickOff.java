@@ -6,10 +6,8 @@ import edra.BTreePlayer;
 import edra.behavior_tree.BTNode;
 import edra.behavior_tree.BTStatus;
 
-//Move o time para a posição de kick off
-// se o time do agente atual tomo gol, entao os atacantes darao o kick off
-// senao, o time fica na home position
-public class MovePlayerToKickOff extends BTNode<BTreePlayer> {
+
+public class GoToKickOff extends BTNode<BTreePlayer> {
     @Override
     public BTStatus tick(BTreePlayer agent) {
         EFieldSide side = agent.getSelfPerc().getSide();

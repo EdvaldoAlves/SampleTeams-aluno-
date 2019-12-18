@@ -7,11 +7,8 @@ import edra.behavior_tree.BTNode;
 import edra.behavior_tree.BTStatus;
 
 
-/**
- * Faz o jogador avancar na direcao a frente de sua homePositio, ou seja,
- * o jogador pode avancar de forma a tentar manter a formacao do time
- */
-public class AdvanceAccordingToHomePosition extends BTNode<BTreePlayer> {
+
+public class MovingUsingHomePosition extends BTNode<BTreePlayer> {
     @Override
     public BTStatus tick(BTreePlayer agent) {
         Vector2D homePosition = agent.getHomePosition();
